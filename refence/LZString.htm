@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Strict//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>LZString_compress</title>
+<script src="lz-string-1.3.3-min.js"></script>
+</head>
+<body>
+	<div>to compress below</div>
+	<textarea style="width:800px;height:200px" id="taSrc"></textarea><br>
+	<button onclick="taResult.value=LZString.compressToBase64(taSrc.value)">compress to below</button>
+	<button onclick="taSrc.value=LZString.decompressFromBase64(taResult.value)">decompress to upper</button>
+	<div>result: </div>
+	<textarea style="width:800px;height:200px" id="taResult"></textarea>
+</body>
+</html>
