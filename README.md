@@ -11,5 +11,5 @@ MIT License
 
 
 ## Rhino Testing
-See rufus.lzstring4java.LZStringInRhino
-And you should change the LZ_STRING_JS_FILE_PATH constant to where the lz-string-1.3.3-min.js locate on your file system.
+See rufus.lzstring4javarhinotest.LZStringTest. Only the testing package need rhino.
+If you're not intrestring in testing, just get the rufus.lzstring4java package only, no rhino or any other third party package is needed.

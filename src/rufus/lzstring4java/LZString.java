@@ -9,7 +9,6 @@
 
 package rufus.lzstring4java;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -708,18 +707,7 @@ public class LZString {
 		System.out.println(decompress(compress(input)));
 		System.out.println(decompressFromBase64(compressToBase64(input)));
 		System.out.println(decompressFromUTF16(compressToUTF16(input)));
-		
-		StringBuffer sb = LZStringInRhino.getStringFromJSFile(new File("C:\\large.json"), "GBK");
-		input = sb.toString();
-		String compressed;
-		long now = System.currentTimeMillis();
-		compressed = LZStringInRhino.compressToBase64(input);
-		System.out.println("LZStringInRhino.compressToBase64 time(ms): " + (System.currentTimeMillis() - now));
-		LZStringInRhino.writeStringToFile(new File("C:\\compressed.json"), compressed, "UTF-8");
-		now = System.currentTimeMillis();
-		compressed = compressToBase64(input);
-		System.out.println("LZString.compressToBase64 time(ms): " + (System.currentTimeMillis() - now));
-		LZStringInRhino.writeStringToFile(new File("C:\\compressed2.json"), compressed, "UTF-8");
+
 	}
 		
 }
