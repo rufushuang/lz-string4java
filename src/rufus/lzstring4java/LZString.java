@@ -696,17 +696,7 @@ public class LZString {
 
 		return LZString.decompress(output.toString());
 		// return output;
-	}
-	
-	public static String compressToEncodedURIComponent(String input) {
-	    if (input == null) return "";
-	    return LZString.compressToBase64(input).replace('=','$').replace('/','-');
-	}
-	
-	public static String decompressFromEncodedURIComponent(String input) {
-	    if (input == null) return "";
-	    if (input == "") return null;
-	    return LZString.decompressFromBase64(input.replace(' ', '+').replace('=','$').replace('/','-'));
+
 	}
 	
 	public static void main(String[] args) throws IOException {
