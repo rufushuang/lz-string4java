@@ -96,13 +96,6 @@ public class LZStringInRhino {
 	
 	protected static String LZ_STRING_JS_FILE_PATH = System.getProperty("user.dir") + File.separatorChar + "refence" + File.separatorChar + "lz-string-1.3.3-min.js";
 	protected static String LZ_STRING_JS;
-	static {
-		try {
-			LZ_STRING_JS = getStringFromJSFile(new File(LZ_STRING_JS_FILE_PATH)).toString();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
 	protected static Script COMPILED_LZ;
 	protected static Context context;
 	protected static Scriptable scope;
@@ -114,6 +107,15 @@ public class LZStringInRhino {
 	protected static Function FUNC_compress;
 	protected static Function FUNC_decompress;
 	static {
+		init();
+	}
+	
+	public static void init() {
+		try {
+			LZ_STRING_JS = getStringFromJSFile(new File(LZ_STRING_JS_FILE_PATH)).toString();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 		// should change above JDK6, or just use Nashorn instead of Rhino?
 		context = Context.enter();
 		scope = context.initStandardObjects();
