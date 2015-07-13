@@ -9,7 +9,6 @@
 
 package rufus.lzstring4javarhinotest;
 
-import java.io.File;
 import java.io.IOException;
 
 import rufus.lzstring4java.LZString;
@@ -24,12 +23,26 @@ public class LZStringTest {
 		String compressed;
 		long now = System.currentTimeMillis();
 		compressed = LZStringInRhino.compressToBase64(input);
-		System.out.println("LZStringInRhino.compressToBase64 time(ms): " + (System.currentTimeMillis() - now));
-		LZStringInRhino.writeStringToFile(new File("C:\\compressed.json"), compressed, "UTF-8");
+		System.out.println("\nLZStringInRhino(133).compressToBase64 time(ms): " + (System.currentTimeMillis() - now) + "\n" + compressed);
+//		LZStringInRhino.writeStringToFile(new File("C:\\compressed.json"), compressed, "UTF-8");
+		now = System.currentTimeMillis();
+		compressed = LZStringInRhino144.compressToBase64(input);
+		System.out.println("\nLZStringInRhino144.compressToBase64 time(ms): " + (System.currentTimeMillis() - now) + "\n" + compressed);
+//		LZStringInRhino.writeStringToFile(new File("C:\\compressed.json"), compressed, "UTF-8");
 		now = System.currentTimeMillis();
 		compressed = LZString.compressToBase64(input);
-		System.out.println("LZString.compressToBase64 time(ms): " + (System.currentTimeMillis() - now));
-		LZStringInRhino.writeStringToFile(new File("C:\\compressed2.json"), compressed, "UTF-8");
+		System.out.println("\nLZString.compressToBase64 time(ms): " + (System.currentTimeMillis() - now) + "\n" + compressed);
+//		LZStringInRhino.writeStringToFile(new File("C:\\compressed2.json"), compressed, "UTF-8");
+
+		// compressToEncodedURIComponent test
+		now = System.currentTimeMillis();
+		compressed = LZStringInRhino144.compressToEncodedURIComponent(input);
+		System.out.println("\nLZStringInRhino144.compressToEncodedURIComponent time(ms): " + (System.currentTimeMillis() - now) + "\n" + compressed);
+
+		now = System.currentTimeMillis();
+		compressed = LZString.compressToEncodedURIComponent(input);
+		System.out.println("\nLZString.compressToEncodedURIComponent time(ms): " + (System.currentTimeMillis() - now) + "\n" + compressed);
+
 	}
 	
 }
