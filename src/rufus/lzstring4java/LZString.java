@@ -310,7 +310,7 @@ public class LZString {
 				value = context_dictionary.get(context_w);
 				for (i = 0; i < context_numBits; i++) {
 					context_data_val = (context_data_val << 1) | (value & 1);
-					if (context_data_position == 15) {
+					if (context_data_position == bitsPerChar - 1) {
 						context_data_position = 0;
 						context_data.add(getCharFromInt.doFunc(context_data_val));
 						context_data_val = 0;
