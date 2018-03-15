@@ -408,7 +408,7 @@ public class LZString {
 	    switch (next = bits) {
 	      case 0:
 	          bits = 0;
-	          maxpower = (int) Math.pow(2,8);
+	          maxpower = (int) powerOf2(8);
 	          power=1;
 	          while (power != maxpower) {
 	            resb = data.val & data.position;
@@ -424,7 +424,7 @@ public class LZString {
 	        break;
 	      case 1:
 	          bits = 0;
-	          maxpower = (int) Math.pow(2,16);
+	          maxpower = powerOf2(16);
 	          power=1;
 	          while (power!=maxpower) {
 	            resb = data.val & data.position;
@@ -450,7 +450,7 @@ public class LZString {
 	        }
 
 	        bits = 0;
-	        maxpower = (int) Math.pow(2,numBits);
+	        maxpower = powerOf2(numBits);
 	        power=1;
 	        while (power!=maxpower) {
 	          resb = data.val & data.position;
@@ -467,7 +467,7 @@ public class LZString {
 	        switch (cc = bits) {
 	          case 0:
 	            bits = 0;
-	            maxpower = (int) Math.pow(2,8);
+	            maxpower = powerOf2(8);
 	            power=1;
 	            while (power!=maxpower) {
 	              resb = data.val & data.position;
@@ -486,7 +486,7 @@ public class LZString {
 	            break;
 	          case 1:
 	            bits = 0;
-	            maxpower = (int) Math.pow(2,16);
+	            maxpower = powerOf2(16);
 	            power=1;
 	            while (power!=maxpower) {
 	              resb = data.val & data.position;
