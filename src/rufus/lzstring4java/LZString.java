@@ -15,12 +15,12 @@ public class LZString {
 
 	private static char[] keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".toCharArray();
 	private static char[] keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$".toCharArray();
-	private static Map<char[], Map<Character, Integer>> baseReverseDic = new HashMap<>();
+	private static Map<char[], Map<Character, Integer>> baseReverseDic = new HashMap<char[], Map<Character, Integer>>();
 
 	private static char getBaseValue(char[] alphabet, Character character) {
 		Map<Character, Integer> map = baseReverseDic.get(alphabet);
 		if (map == null) {
-			map = new HashMap<>();
+			map = new HashMap<Character, Integer>();
 			baseReverseDic.put(alphabet, map);
 			for (int i = 0; i < alphabet.length; i++) {
 				map.put(alphabet[i], i);
@@ -51,7 +51,7 @@ public class LZString {
 		}
 	}
 	
-	public static String decompressFromBase64(String inputStr) {
+	public static String decompressFromBase64(final String inputStr) {
 		if (inputStr == null)
 			return "";
 		if (inputStr.equals(""))
@@ -75,7 +75,7 @@ public class LZString {
 		}) + " ";
 	}
 
-	public static String decompressFromUTF16(String compressedStr) {
+	public static String decompressFromUTF16(final String compressedStr) {
 		if (compressedStr == null)
 			return "";
 		if (compressedStr.isEmpty())
@@ -104,7 +104,7 @@ public class LZString {
 	public static String decompressFromEncodedURIComponent(String inputStr) {
 	    if (inputStr == null) return "";
 	    if (inputStr.isEmpty()) return null;
-	    String urlEncodedInputStr = inputStr.replace(' ', '+');
+	    final String urlEncodedInputStr = inputStr.replace(' ', '+');
 		return LZString._decompress(urlEncodedInputStr.length(), 32, new DecompressFunctionWrapper() {
 			@Override
 			public char doFunc(int index) {
@@ -370,7 +370,7 @@ public class LZString {
 		});
 	}
 	private static String _decompress(int length, int resetValue, DecompressFunctionWrapper getNextValue) {
-		List<String> dictionary = new ArrayList<>();
+		List<String> dictionary = new ArrayList<String>();
 		// TODO: is next an unused variable in original lz-string?
 		@SuppressWarnings("unused")
 		int next;
