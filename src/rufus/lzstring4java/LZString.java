@@ -15,18 +15,16 @@ public class LZString {
 
 	private static char[] keyStrBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".toCharArray();
 	private static char[] keyStrUriSafe = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$".toCharArray();
-	private static Map<char[], Map<Character, Integer>> baseReverseDic = new HashMap<char[], Map<Character, Integer>>();
+	private static Map<Character, Integer> baseValueForBase64 = new HashMap<Character, Integer>();
+	private static Map<Character, Integer> baseValueForUriSafe = new HashMap<Character, Integer>();
 
-	private static char getBaseValue(char[] alphabet, Character character) {
-		Map<Character, Integer> map = baseReverseDic.get(alphabet);
-		if (map == null) {
-			map = new HashMap<Character, Integer>();
-			baseReverseDic.put(alphabet, map);
-			for (int i = 0; i < alphabet.length; i++) {
-				map.put(alphabet[i], i);
-			}
+	static {
+		for (int i = 0; i < keyStrBase64.length; i++) {
+			baseValueForBase64.put(keyStrBase64[i], i);
 		}
-		return (char) map.get(character).intValue();
+		for (int i = 0; i < keyStrUriSafe.length; i++) {
+			baseValueForUriSafe.put(keyStrUriSafe[i], i);
+		}
 	}
 	
 	public static String compressToBase64(String input) {
@@ -59,7 +57,7 @@ public class LZString {
 		return LZString._decompress(inputStr.length(), 32, new DecompressFunctionWrapper() {
 			@Override
 			public char doFunc(int index) {
-				return getBaseValue(keyStrBase64, inputStr.charAt(index));
+				return (char) baseValueForBase64.get(inputStr.charAt(index)).intValue();
 			}
 		});
 	}	
@@ -108,7 +106,7 @@ public class LZString {
 		return LZString._decompress(urlEncodedInputStr.length(), 32, new DecompressFunctionWrapper() {
 			@Override
 			public char doFunc(int index) {
-				return getBaseValue(keyStrUriSafe, urlEncodedInputStr.charAt(index));
+				return (char) baseValueForUriSafe.get(urlEncodedInputStr.charAt(index)).intValue();
 			}
 		});
 	}
@@ -392,7 +390,7 @@ public class LZString {
 		}
 		
 		bits = 0;
-		maxpower = (int) powerOf2(2);
+		maxpower = powerOf2(2);
 		power = 1;
 		while (power != maxpower) {
 			resb = data.val & data.position;
@@ -408,7 +406,7 @@ public class LZString {
 	    switch (next = bits) {
 	      case 0:
 	          bits = 0;
-	          maxpower = (int) powerOf2(8);
+	          maxpower = powerOf2(8);
 	          power=1;
 	          while (power != maxpower) {
 	            resb = data.val & data.position;
